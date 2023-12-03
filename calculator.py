@@ -1,6 +1,13 @@
+#importing modules
+import sys
+
+
+#defining funtions
 def arithmetic():
-    first_number = input ("what is the first number?: ")
-    second_number = input ("what is the second number?: ")
+    global output
+    global not_valid
+    n_one = input("what is the first number?: ")
+    n_two = input("what is the second number?: ")
     print ("which operation should be used?:")
     print ("1) Addition")
     print ("2) Subtraction")
@@ -12,40 +19,47 @@ def arithmetic():
     math_op.lower()
     if math_op == "add" or math_op == "addition":
         math_op = 1
-    if math_op == "subtract" or math_op == "SUBTRACTION":
+    elif math_op == "subtract" or math_op == "SUBTRACTION":
         math_op = 2
-    if math_op == "multiply" or math_op == "multiplication":
+    elif math_op == "multiply" or math_op == "multiplication":
         math_op = 3
-    if math_op == "divide" or math_op == "division":
+    elif math_op == "divide" or math_op == "division":
         math_op = 4
-    if math_op == "exponent" or math_op == "exponentiation":
+    elif math_op == "exponent" or math_op == "exponentiation":
         math_op = 5
 
     try:
-        float(first_number) and float(second_number)
+        int(n_one) and int(n_two)
         not_valid = 0
     except ValueError:
-        not_valid = 1
-    if int(math_op) == (0):
-       output = ("")
-    else:
-        if int(math_op) != (1, 5):
-            output = ("Non vaild input.")
-        if not_valid == 1:
-            output = ("Non vaild input.")
-        else:
-            if int(math_op) == 1:
-                output = (f"{float(first_number)} + {float(second_number)} = {float(first_number) + float(second_number)}")
-            if int(math_op) == 2:
-                output = (f"{float(first_number)} - {float(second_number)} = {float(first_number) - float(second_number)}")
-            if int(math_op) == 3:
-                output = (f"{float(first_number)} * {float(second_number)} = {float(first_number) * float(second_number)}")
-            if int(math_op) == 4:
-                output = (f"{float(first_number)} / {float(second_number)} = {float(first_number) / float(second_number)}")
-            if int(math_op) == 5:
-                output = (f"{float(first_number)}^{float(second_number)} = {float(first_number) ** float(second_number)}")
-                
+        output = ("Non vaild input.")
+    if int(math_op) == (1, 5):
+        output = ("Non vaild input.")
         print (output)
+    else:
+        if int(math_op) == (0):
+            output = ("")
+            print (output)
+        elif not_valid == 0:
+            math_operation(math_op, n_one, n_two)
+
+def math_operation(math_op, n_one, n_two):
+    if int(math_op) == 1:
+        output = (f"{float(n_one)} + {float(n_two)} = {float(n_one) + float(n_two)}")
+    elif int(math_op) == 2:
+        output = (f"{float(n_one)} - {float(n_two)} = {float(n_one) - float(n_two)}")
+    elif int(math_op) == 3:
+        output = (f"{float(n_one)} * {float(n_two)} = {float(n_one) * float(n_two)}")
+    elif int(math_op) == 4:
+        output = (f"{float(n_one)} / {float(n_two)} = {float(n_one) / float(n_two)}")
+    elif int(math_op) == 5:
+        output = (f"{float(n_one)}^{float(n_two)} = {float(n_one) ** float(n_two)}")
+    print (output)
+
+
+
+
+
 
 def varible_editor():
     print("What would you like to do?:")
@@ -65,14 +79,26 @@ def varible_editor():
     
     if not_valid == 1:
         print(invalid)
-    
-    
 
-#start of acual code
+def calc_funtion():
+    if int(calc_option) == 1:
+        arithmetic()
+    elif int(calc_option) == 2:
+        varible_editor()
+    
+    elif int(calc_option) == 0:
+        print("Exiting calculator")
+        sys.exit()
+
+#defining global varibles
 invalid = ("Non vaild input.")
 math_op = -1
-calc_option = -1
+calc_option = -7
 x = 1
+math_op = 0
+
+#start of acual code
+
 while True: 
     not_valid = 0
     if calc_option == 0:
@@ -82,17 +108,15 @@ while True:
     print("What would you like to do?")
     print("1) Arithmetic")
     print("2) Varible editor")
-    """calc_option = int(input())
+    print("0) Exit")
+    calc_option = input()
     try:
         int(calc_option)
         calc_valid = 1
     except ValueError:
         calc_valid = 0
     if calc_valid == 0:
-        print (invalid)"""
-    
-        
-
-    
-    arithmetic()
+        print (invalid)
+    else:
+        calc_funtion()
     
